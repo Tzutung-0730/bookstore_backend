@@ -1,0 +1,465 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My Bookstore API",
+        "description": "這是書店的 API 文件",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth/Register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "使用者註冊",
+                "operationId": "d556ff458da77d783fbde8e228b0cbed",
+                "requestBody": {
+                    "description": "註冊所需的使用者資料",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "username",
+                                    "account",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "Administrator"
+                                    },
+                                    "account": {
+                                        "type": "string",
+                                        "example": "admin"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "admin@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "admin123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "註冊成功",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "註冊成功"
+                                        },
+                                        "user": {
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "驗證錯誤"
+                    }
+                }
+            }
+        },
+        "/api/auth/Login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "使用者登入",
+                "operationId": "1d9380b6988d4630cf44a6ae86e5e8c4",
+                "requestBody": {
+                    "description": "登入所需的帳號與密碼",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "account",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "account": {
+                                        "type": "string",
+                                        "example": "admin"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "admin123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "登入成功",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "登入成功"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "帳號或密碼錯誤"
+                    }
+                }
+            }
+        },
+        "/api/auth/Logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "使用者登出",
+                "operationId": "6be8584b63cf0e4a76e4bf9f80d4f9b8",
+                "responses": {
+                    "200": {
+                        "description": "已登出",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "已登出"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登出失敗"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/menu/GetMenu": {
+            "get": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "取得所有菜單項目",
+                "operationId": "a0e97031075cc898f72cf8769df169d9",
+                "responses": {
+                    "200": {
+                        "description": "成功取得菜單",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "首頁"
+                                            },
+                                            "url": {
+                                                "type": "string",
+                                                "example": "/Home"
+                                            },
+                                            "icon": {
+                                                "type": "string",
+                                                "example": "pi-home"
+                                            },
+                                            "order": {
+                                                "type": "integer",
+                                                "example": 1
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "驗證錯誤"
+                    }
+                }
+            }
+        },
+        "/api/menu/CreateMenu": {
+            "post": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "新增一筆 Menu",
+                "operationId": "a347a7a6ec44e32e702f7c28ac3c2972",
+                "requestBody": {
+                    "description": "新增菜單所需資料",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "url"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "首頁"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "/Home"
+                                    },
+                                    "icon": {
+                                        "type": "string",
+                                        "example": "pi-home"
+                                    },
+                                    "order": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "visible_for": {
+                                        "type": "string",
+                                        "example": "user"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "新增成功",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "menu_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "首頁"
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "/Home"
+                                        },
+                                        "icon": {
+                                            "type": "string",
+                                            "example": "pi-home"
+                                        },
+                                        "order": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "visible_for": {
+                                            "type": "string",
+                                            "example": "user"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "驗證錯誤"
+                    }
+                }
+            }
+        },
+        "/api/menu/UpdateMenu/{id}": {
+            "put": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "更新特定 Menu",
+                "operationId": "b9dd3e3e1d9a0927aebfc5d0eb7cc593",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Menu 的 ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "更新資料",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "回首頁"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "/Home"
+                                    },
+                                    "icon": {
+                                        "type": "string",
+                                        "example": "pi-home"
+                                    },
+                                    "order": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "visible_for": {
+                                        "type": "string",
+                                        "example": "user"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "更新成功",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "menu_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "回首頁"
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "/Home"
+                                        },
+                                        "icon": {
+                                            "type": "string",
+                                            "example": "pi-home"
+                                        },
+                                        "order": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "visible_for": {
+                                            "type": "string",
+                                            "example": "user"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "驗證錯誤"
+                    }
+                }
+            }
+        },
+        "/api/menu/DeleteMenu/{id}": {
+            "delete": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "刪除特定 Menu",
+                "operationId": "0b17839f05735035bb360708cd42950d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Menu 的 ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "刪除成功",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "刪除成功"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "找不到指定 Menu"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Menu",
+            "description": "Menu"
+        }
+    ]
+}
