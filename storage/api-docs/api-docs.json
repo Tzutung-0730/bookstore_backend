@@ -12,7 +12,7 @@
                     "Auth"
                 ],
                 "summary": "使用者註冊",
-                "operationId": "d556ff458da77d783fbde8e228b0cbed",
+                "operationId": "ba577e61b16ce424e83adf7bf480c44c",
                 "requestBody": {
                     "description": "註冊所需的使用者資料",
                     "required": true,
@@ -83,7 +83,7 @@
                     "Auth"
                 ],
                 "summary": "使用者登入",
-                "operationId": "1d9380b6988d4630cf44a6ae86e5e8c4",
+                "operationId": "1d5d42c51423c44d1486c7c5cee8b4f7",
                 "requestBody": {
                     "description": "登入所需的帳號與密碼",
                     "required": true,
@@ -144,7 +144,7 @@
                     "Auth"
                 ],
                 "summary": "使用者登出",
-                "operationId": "6be8584b63cf0e4a76e4bf9f80d4f9b8",
+                "operationId": "5bbc0da1ea2cecb59fbb05f11195108d",
                 "responses": {
                     "200": {
                         "description": "已登出",
@@ -179,7 +179,7 @@
                     "Menu"
                 ],
                 "summary": "取得所有菜單項目",
-                "operationId": "a0e97031075cc898f72cf8769df169d9",
+                "operationId": "705497f30f71e5155f123df76c9ad1ac",
                 "responses": {
                     "200": {
                         "description": "成功取得菜單",
@@ -204,6 +204,16 @@
                                             "order": {
                                                 "type": "integer",
                                                 "example": 1
+                                            },
+                                            "visible_for": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "example": [
+                                                    "user",
+                                                    "admin"
+                                                ]
                                             }
                                         },
                                         "type": "object"
@@ -224,7 +234,7 @@
                     "Menu"
                 ],
                 "summary": "新增一筆 Menu",
-                "operationId": "a347a7a6ec44e32e702f7c28ac3c2972",
+                "operationId": "a7f06c71a9fccfab98ea2a14513c5a00",
                 "requestBody": {
                     "description": "新增菜單所需資料",
                     "required": true,
@@ -253,8 +263,14 @@
                                         "example": 1
                                     },
                                     "visible_for": {
-                                        "type": "string",
-                                        "example": "user"
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "user",
+                                            "admin"
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -290,8 +306,14 @@
                                             "example": 1
                                         },
                                         "visible_for": {
-                                            "type": "string",
-                                            "example": "user"
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "user",
+                                                "admin"
+                                            ]
                                         }
                                     },
                                     "type": "object"
@@ -311,7 +333,7 @@
                     "Menu"
                 ],
                 "summary": "更新特定 Menu",
-                "operationId": "b9dd3e3e1d9a0927aebfc5d0eb7cc593",
+                "operationId": "a1a8b7630f43bc8ee04922bfc5736119",
                 "parameters": [
                     {
                         "name": "id",
@@ -348,8 +370,13 @@
                                         "example": 1
                                     },
                                     "visible_for": {
-                                        "type": "string",
-                                        "example": "user"
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "user"
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -385,8 +412,13 @@
                                             "example": 1
                                         },
                                         "visible_for": {
-                                            "type": "string",
-                                            "example": "user"
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "user"
+                                            ]
                                         }
                                     },
                                     "type": "object"
@@ -406,7 +438,7 @@
                     "Menu"
                 ],
                 "summary": "刪除特定 Menu",
-                "operationId": "0b17839f05735035bb360708cd42950d",
+                "operationId": "18fa9252576d7b6369583cd9fe65dfec",
                 "parameters": [
                     {
                         "name": "id",
@@ -441,6 +473,97 @@
                     }
                 }
             }
+        },
+        "/api/scrapebooks/ScrapeBooks": {
+            "get": {
+                "tags": [
+                    "ScrapeBooks"
+                ],
+                "summary": "顯示爬蟲進度頁面",
+                "operationId": "e3ba173dd9db3735bd721dc884b6f381",
+                "responses": {
+                    "200": {
+                        "description": "成功返回爬蟲進度頁面"
+                    }
+                }
+            }
+        },
+        "/api/scrapebooks/StartScraping": {
+            "post": {
+                "tags": [
+                    "ScrapeBooks"
+                ],
+                "summary": "啟動爬蟲",
+                "operationId": "d291cf6cc60dccdd416cfb7cf0baf083",
+                "responses": {
+                    "200": {
+                        "description": "爬蟲已啟動"
+                    },
+                    "500": {
+                        "description": "爬蟲啟動失敗"
+                    }
+                }
+            }
+        },
+        "/api/scrapebooks/StopScraping": {
+            "post": {
+                "tags": [
+                    "ScrapeBooks"
+                ],
+                "summary": "停止爬蟲",
+                "operationId": "f575f202d2f0e40dc2d1e0a1b7b5b65c",
+                "responses": {
+                    "200": {
+                        "description": "爬蟲已停止"
+                    },
+                    "500": {
+                        "description": "停止爬蟲時發生錯誤"
+                    }
+                }
+            }
+        },
+        "/api/scrapebooks/GetScrapeProgress": {
+            "get": {
+                "tags": [
+                    "ScrapeBooks"
+                ],
+                "summary": "獲取爬蟲進度",
+                "operationId": "5cc4880db4bbc7241a5bfec626acfe5e",
+                "responses": {
+                    "200": {
+                        "description": "成功返回爬蟲進度",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "progress": {
+                                            "properties": {
+                                                "current": {
+                                                    "type": "integer",
+                                                    "example": 10
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": 100
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "爬蟲正在進行中"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "獲取進度失敗"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -460,6 +583,10 @@
         {
             "name": "Menu",
             "description": "Menu"
+        },
+        {
+            "name": "ScrapeBooks",
+            "description": "ScrapeBooks"
         }
     ]
 }

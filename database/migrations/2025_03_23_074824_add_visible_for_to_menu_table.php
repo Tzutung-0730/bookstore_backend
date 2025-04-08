@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::table('menu', function (Blueprint $table) {
             // 新增 visible_for 欄位（可以根據你想的值來定義）
-            $table->enum('visible_for', ['all', 'guest', 'user', 'admin'])
-                  ->default('all')
-                  ->after('order');
+            $table->json('visible_for')->default(json_encode(['all']))->after('order');
 
             // 刪除原本的 menu_type 欄位（如果存在）
             if (Schema::hasColumn('menu', 'menu_type')) {

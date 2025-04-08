@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\MenuController;
+use App\Controllers\MenuController;
 
 Route::prefix('menu')->group(function () {
     Route::get('GetMenu', [MenuController::class, 'GetMenu']);

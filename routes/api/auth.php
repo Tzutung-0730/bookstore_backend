@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Controllers\AuthController;
 
 Route::prefix('auth')->group(function () {
     Route::post('Register', [AuthController::class, 'Register']);
