@@ -16,16 +16,16 @@ class CrawlerService
         set_time_limit(0);
 
         // 先啟動 Selenium Server（這會開啟一個新的終端機視窗執行命令）
-        $command = 'start cmd /k "java -Dwebdriver.chrome.driver="../chromedriver-win64/chromedriver.exe" -jar ../selenium-server-4.30.0.jar standalone"';
+        // $command = 'start cmd /k "java -Dwebdriver.chrome.driver="../chromedriver-win64/chromedriver.exe" -jar ../selenium-server-4.30.0.jar standalone"';
         
-        // 執行命令
-        exec($command, $output, $returnVar);
+        // // 執行命令
+        // exec($command, $output, $returnVar);
 
-        // 檢查命令是否成功執行
-        if ($returnVar !== 0) {
-            echo "無法啟動 Selenium Server\n";
-            return;
-        }
+        // // 檢查命令是否成功執行
+        // if ($returnVar !== 0) {
+        //     echo "無法啟動 Selenium Server\n";
+        //     return;
+        // }
 
         echo "Selenium Server 已啟動\n";
 

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('menu', function (Blueprint $table) {
-            // 新增 visible_for 欄位（可以根據你想的值來定義）
-            $table->json('visible_for')->default(json_encode(['all']))->after('order');
+            // 新增 visible_for 欄位，不設預設值
+            $table->json('visible_for')->notNull()->after('order');
 
             // 刪除原本的 menu_type 欄位（如果存在）
             if (Schema::hasColumn('menu', 'menu_type')) {

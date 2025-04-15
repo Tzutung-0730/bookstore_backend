@@ -173,6 +173,199 @@
                 ]
             }
         },
+        "/api/books/GetBooks": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "取得所有書籍",
+                "description": "取得所有書籍並進行分頁",
+                "operationId": "555c7999d24812aa1d2cafe5b6cb105a",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "分頁的頁碼",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功返回書籍資料",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "current_page": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "book_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "example": "書籍標題"
+                                                    },
+                                                    "author": {
+                                                        "type": "string",
+                                                        "example": "作者名稱"
+                                                    },
+                                                    "publisher": {
+                                                        "type": "string",
+                                                        "example": "出版商名稱"
+                                                    },
+                                                    "publish_date": {
+                                                        "type": "string",
+                                                        "example": "2022-01-01"
+                                                    },
+                                                    "category": {
+                                                        "type": "string",
+                                                        "example": "小說"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "簡短描述"
+                                                    },
+                                                    "isbn": {
+                                                        "type": "string",
+                                                        "example": "1234567890"
+                                                    },
+                                                    "price": {
+                                                        "type": "decimal",
+                                                        "example": 19.99
+                                                    },
+                                                    "cover_image": {
+                                                        "type": "string",
+                                                        "example": "https://example.com/cover.jpg"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "type": "string",
+                                                    "example": "http://example.com/api/books?page=1"
+                                                },
+                                                "last": {
+                                                    "type": "string",
+                                                    "example": "http://example.com/api/books?page=5"
+                                                },
+                                                "prev": {
+                                                    "type": "string",
+                                                    "example": "http://example.com/api/books?page=2"
+                                                },
+                                                "next": {
+                                                    "type": "string",
+                                                    "example": "http://example.com/api/books?page=4"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "錯誤的請求，頁碼參數無效"
+                    },
+                    "404": {
+                        "description": "無書籍資料"
+                    }
+                }
+            }
+        },
+        "/api/books/GetBookByISBN/{isbn}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "根據 ISBN 獲取單本書籍",
+                "description": "根據 ISBN 獲取單本書籍詳細資料",
+                "operationId": "a9717d6711dc01f3e5ce8dca8a2eb640",
+                "parameters": [
+                    {
+                        "name": "isbn",
+                        "in": "path",
+                        "description": "書籍的 ISBN",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功返回書籍詳細資料",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "book_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Book Title"
+                                        },
+                                        "author": {
+                                            "type": "string",
+                                            "example": "Author Name"
+                                        },
+                                        "publisher": {
+                                            "type": "string",
+                                            "example": "Publisher Name"
+                                        },
+                                        "publish_date": {
+                                            "type": "string",
+                                            "example": "2022-01-01"
+                                        },
+                                        "category": {
+                                            "type": "string",
+                                            "example": "Fiction"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Full description of the book"
+                                        },
+                                        "isbn": {
+                                            "type": "string",
+                                            "example": "1234567890"
+                                        },
+                                        "price": {
+                                            "type": "decimal",
+                                            "example": 19.99
+                                        },
+                                        "cover_image": {
+                                            "type": "string",
+                                            "example": "https://example.com/image.jpg"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "書籍未找到"
+                    }
+                }
+            }
+        },
         "/api/menu/GetMenu": {
             "get": {
                 "tags": [
@@ -579,6 +772,10 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Books",
+            "description": "Books"
         },
         {
             "name": "Menu",

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cart', function (Blueprint $table) {
-            $table->foreign(['user_id'], 'cart_ibfk_1')->references(['user_id'])->on('users')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['book_id'], 'cart_ibfk_2')->references(['book_id'])->on('books')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign(['user_id'], 'cart_ibfk_1')->references(['user_id'])->on('users')->onUpdate('no action')->onDelete('no action');
+            $table->foreign(['book_id'], 'cart_ibfk_2')->references(['book_id'])->on('books')->onUpdate('no action')->onDelete('no action');
         });
     }
 

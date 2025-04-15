@@ -15,7 +15,7 @@ class MenuTableSeeder extends Seeder
     {
         DB::table('menu')->insert([
             // 對所有人顯示
-            ['title' => '首頁', 'url' => '/home', 'icon' => 'pi-home', 'order' => 1, 'visible_for' => json_encode(['all'])],
+            ['title' => '首頁', 'url' => '/', 'icon' => 'pi-home', 'order' => 1, 'visible_for' => json_encode(['all'])],
             ['title' => '書籍總覽', 'url' => '/books', 'icon' => 'pi-book', 'order' => 2, 'visible_for' => json_encode(['all'])],
             ['title' => '關於我們', 'url' => '/about', 'icon' => 'pi-info', 'order' => 3, 'visible_for' => json_encode(['all'])],
             ['title' => '聯絡我們', 'url' => '/contact', 'icon' => 'pi-envelope', 'order' => 4, 'visible_for' => json_encode(['all'])],
